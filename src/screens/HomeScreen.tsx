@@ -2,6 +2,7 @@ import { ScrollView, View } from 'react-native';
 import HeroSwiper from '~/components/partials/HeroSwiper';
 import { StatusBar } from 'expo-status-bar';
 import HeroCategories from '~/components/partials/HeroCategories';
+import ComicSection from '~/components/shared/ComicSection';
 
 export default function HomeScreen() {
   return (
@@ -12,6 +13,8 @@ export default function HomeScreen() {
         <HeroSwiper />
 
         <HeroCategories />
+
+        <ComicSection />
       </ScrollView>
     </View>
   );
