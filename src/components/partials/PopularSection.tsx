@@ -1,13 +1,16 @@
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import PopularCard from '~/components/shared/PopularCard';
+import { useAppNavigation } from '~/hooks/navigationHooks';
 
 export default function PopularSection() {
+  const navigation = useAppNavigation();
+
   return (
     <View className='flex-col w-full h-fit px-4 py-2 mt-4'>
       <View className='flex-row justify-between items-center'>
         <Text className='text-gray-300 text-lg font-semibold'>Phổ biến</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('PopularScreen')}>
           <Text className='text-gray-400'>Xem thêm</Text>
         </TouchableOpacity>
       </View>

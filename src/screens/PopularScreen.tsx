@@ -1,9 +1,9 @@
 import { FlatList, StatusBar, Text, View } from 'react-native';
 import CustomSafeArea from '~/components/shared/CustomSafeArea';
-import GenresCard from '~/components/shared/GenresCard';
 import BackHeader from '~/components/shared/BackHeader';
+import PopularCard from '~/components/shared/PopularCard';
 
-export default function GenresScreen() {
+export default function PopularScreen() {
   return (
     <CustomSafeArea>
       <View className='flex-1 bg-black px-2 py-4'>
@@ -12,17 +12,16 @@ export default function GenresScreen() {
         <BackHeader />
 
         <Text className='text-3xl text-bold text-white ml-2 my-4'>
-          Thể loại
+          Phổ biến
         </Text>
 
         <FlatList
-          showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4, 5, 6, 7, 8]}
+          showsVerticalScrollIndicator={false}
+          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
           renderItem={({ item, index }) => {
             return (
-              <View className={`flex-row justify-center items-center mt-6`}>
-                <GenresCard style={{ marginRight: 20 }} />
-                <GenresCard />
+              <View className={`flex-col mr-8`}>
+                <PopularCard isTop />
               </View>
             );
           }}

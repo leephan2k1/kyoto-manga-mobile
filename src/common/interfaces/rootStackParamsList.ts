@@ -7,4 +7,5 @@ export interface RootStackParamsList extends ParamListBase {
   Bookmark: {};
   HomeScreen: {};
   GenresScreen: undefined;
+  PopularScreen: undefined;
 }
