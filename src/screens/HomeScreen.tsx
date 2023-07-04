@@ -3,6 +3,7 @@ import HeroSwiper from '~/components/partials/HeroSwiper';
 import { StatusBar } from 'expo-status-bar';
 import HeroCategories from '~/components/partials/HeroCategories';
 import ComicSection from '~/components/shared/ComicSection';
+import GenresSection from '~/components/partials/GenresSection';
 
 export default function HomeScreen() {
   return (
@@ -15,6 +16,8 @@ export default function HomeScreen() {
         <HeroCategories />
 
         <ComicSection />
+
+        <GenresSection />
       </ScrollView>
     </View>
   );
