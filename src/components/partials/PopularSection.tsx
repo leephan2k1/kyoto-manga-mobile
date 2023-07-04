@@ -1,6 +1,14 @@
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import PopularCard from '~/components/shared/PopularCard';
 import { useAppNavigation } from '~/hooks/navigationHooks';
+
+const { width } = Dimensions.get('window');
 
 export default function PopularSection() {
   const navigation = useAppNavigation();
@@ -22,9 +30,12 @@ export default function PopularSection() {
         renderItem={({ item, index }) => {
           return (
             <View className={`flex-col mr-8`}>
-              <PopularCard isTop />
-              <PopularCard isTop />
-              <PopularCard isTop={false} />
+              <PopularCard style={{ width: (width * 80) / 100 }} isTop />
+              <PopularCard style={{ width: (width * 80) / 100 }} isTop />
+              <PopularCard
+                style={{ width: (width * 80) / 100 }}
+                isTop={false}
+              />
             </View>
           );
         }}

@@ -1,12 +1,17 @@
-import { Dimensions, Text, View } from 'react-native';
+import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import { Image } from 'expo-image';
 import { BookOpenRoundedIcon } from '~/components/icons';
 
-const { width } = Dimensions.get('window');
-export default function PopularCard({ isTop }: { isTop: boolean }) {
+export default function PopularCard({
+  isTop,
+  style,
+}: {
+  isTop: boolean;
+  style: StyleProp<ViewStyle>;
+}) {
   return (
     <View
-      style={{ width: (width * 80) / 100 }}
+      style={style}
       className={`h-[180] ${
         isTop ? 'border-b-2 border-white/20' : ''
       } mt-4 flex-row pb-4`}
