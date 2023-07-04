@@ -1,11 +1,15 @@
-import { Text, View } from 'react-native';
+import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import { Image } from 'expo-image';
 
-export default function GenresCard({ isBottom }: { isBottom: boolean }) {
+export default function GenresCard({
+  style,
+}: {
+  style?: StyleProp<ViewStyle>;
+}) {
   return (
     <View
-      style={{ marginTop: isBottom ? 30 : 0 }}
-      className='w-[180] h-[100] rounded-2xl relative'
+      style={style}
+      className='w-[180] h-[100] rounded-xl relative overflow-hidden'
     >
       <Image
         priority='high'

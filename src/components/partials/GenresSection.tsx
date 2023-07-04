@@ -1,13 +1,16 @@
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import GenresCard from '~/components/shared/GenresCard';
+import { useAppNavigation } from '~/hooks/navigationHooks';
 
 export default function GenresSection() {
+  const navigation = useAppNavigation();
+
   return (
     <View className='flex-col w-full h-fit px-4 py-2'>
       <View className='flex-row justify-between items-center mb-4'>
         <Text className='text-gray-300 text-lg font-semibold'>Thể loại</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('GenresScreen')}>
           <Text className='text-gray-400'>Xem thêm</Text>
         </TouchableOpacity>
       </View>
@@ -19,8 +22,8 @@ export default function GenresSection() {
         renderItem={({ item, index }) => {
           return (
             <View className={`flex-col ${index !== 4 ? 'mr-6' : ''}`}>
-              <GenresCard isBottom={false} />
-              <GenresCard isBottom />
+              <GenresCard />
+              <GenresCard style={{ marginTop: 30 }} />
             </View>
           );
         }}
