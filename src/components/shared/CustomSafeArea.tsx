@@ -17,6 +17,7 @@ export default function CustomSafeArea({ children }: CustomSafeAreaProps) {
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
         paddingRight: insets.right,
+        backgroundColor: 'black',
       }}
     >
       {children}
