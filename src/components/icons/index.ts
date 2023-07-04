@@ -8,3 +8,4 @@ export * from './BookmarkIcon';
 export * from './UserIcon';
 export * from './MagnifyingIcon';
 export * from './BookOpenRoundedIcon';
+export * from './ChevronLeftIcon';
