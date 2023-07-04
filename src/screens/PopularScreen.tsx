@@ -1,7 +1,14 @@
-import { FlatList, StatusBar, Text, View } from 'react-native';
+import {
+  FlatList,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import CustomSafeArea from '~/components/shared/CustomSafeArea';
 import BackHeader from '~/components/shared/BackHeader';
 import PopularCard from '~/components/shared/PopularCard';
+import { AdjustmentIcon } from '~/components/icons';
 
 export default function PopularScreen() {
   return (
@@ -9,7 +16,11 @@ export default function PopularScreen() {
       <View className='flex-1 bg-black px-2 py-4'>
         <StatusBar barStyle={'light-content'} />
 
-        <BackHeader />
+        <BackHeader>
+          <TouchableOpacity>
+            <AdjustmentIcon width={28} height={28} className='text-primary' />
+          </TouchableOpacity>
+        </BackHeader>
 
         <Text className='text-3xl text-bold text-white ml-2 my-4'>
           Phổ biến
