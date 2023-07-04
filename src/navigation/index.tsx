@@ -8,7 +8,7 @@ import {
   UserIcon,
 } from '~/components/icons';
 import { TAB_BAR_MAPPING } from '~/common/constants';
-import { Text } from 'react-native';
+import { Platform, Text } from 'react-native';
 import HomeStackScreen from '~/navigation/stacks/HomeStack';
 
 const Tab = createBottomTabNavigator();
@@ -39,7 +39,7 @@ export default function Navigation() {
           tabBarInactiveTintColor: '#9ca3af',
           headerShown: false,
           tabBarStyle: {
-            height: 55,
+            height: Platform.OS === 'ios' ? 90 : 55,
             backgroundColor: '#1c1917',
             borderTopWidth: 0,
           },
