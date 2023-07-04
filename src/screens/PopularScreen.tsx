@@ -1,14 +1,8 @@
-import {
-  FlatList,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, StatusBar, Text, View } from 'react-native';
 import CustomSafeArea from '~/components/shared/CustomSafeArea';
 import BackHeader from '~/components/shared/BackHeader';
 import PopularCard from '~/components/shared/PopularCard';
-import { AdjustmentIcon } from '~/components/icons';
+import PopularFilterModal from '~/components/partials/PopularFilterModal';
 
 export default function PopularScreen() {
   return (
@@ -17,9 +11,7 @@ export default function PopularScreen() {
         <StatusBar barStyle={'light-content'} />
 
         <BackHeader>
-          <TouchableOpacity>
-            <AdjustmentIcon width={28} height={28} className='text-primary' />
-          </TouchableOpacity>
+          <PopularFilterModal />
         </BackHeader>
 
         <Text className='text-3xl text-bold text-white ml-2 my-4'>
@@ -31,8 +23,8 @@ export default function PopularScreen() {
           data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
           renderItem={({ item, index }) => {
             return (
-              <View className={`flex-col mr-8`}>
-                <PopularCard isTop />
+              <View className={`flex-col mr-8 w-full`}>
+                <PopularCard isTop style={{ width: '100%' }} />
               </View>
             );
           }}

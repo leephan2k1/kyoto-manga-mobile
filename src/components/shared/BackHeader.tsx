@@ -11,18 +11,17 @@ export default function BackHeader({ customTitle, children }: BackHeaderProps) {
   const navigation = useAppNavigation();
 
   return (
-    <TouchableOpacity
-      className='flex-row items-center justify-between my-2'
-      onPress={() => navigation.goBack()}
-    >
-      <View className='flex-row items-center'>
-        <ChevronLeftIcon width={30} height={30} className='text-primary' />
-        <Text className='text-primary text-xl'>
-          {customTitle ? customTitle : 'Quay về'}
-        </Text>
-      </View>
+    <View className='flex-row items-center justify-between my-2'>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <View className='flex-row items-center'>
+          <ChevronLeftIcon width={30} height={30} className='text-primary' />
+          <Text className='text-primary text-xl'>
+            {customTitle ? customTitle : 'Quay về'}
+          </Text>
+        </View>
+      </TouchableOpacity>
 
       {children}
-    </TouchableOpacity>
+    </View>
   );
 }
