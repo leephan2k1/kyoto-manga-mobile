@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from '~/screens/HomeScreen';
 import SettingsScreen from '~/screens/SettingsScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
@@ -10,6 +9,7 @@ import {
 } from '~/components/icons';
 import { TAB_BAR_MAPPING } from '~/common/constants';
 import { Text } from 'react-native';
+import HomeStackScreen from '~/navigation/stacks/HomeStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -61,7 +61,7 @@ export default function Navigation() {
             headerShown: false,
           }}
           name={'Home'}
-          component={HomeScreen}
+          component={HomeStackScreen}
         />
         <Tab.Screen name={'Bookmark'} component={SettingsScreen} />
         <Tab.Screen name={'Search'} component={SettingsScreen} />
