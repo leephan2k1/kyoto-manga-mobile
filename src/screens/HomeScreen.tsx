@@ -16,11 +16,13 @@ export default function HomeScreen() {
 
         <HeroCategories />
 
-        <ComicSection />
+        <ComicSection title='Gợi ý' />
 
         <GenresSection />
 
         <PopularSection />
+
+        <ComicSection title='Truyện mới' />
       </ScrollView>
     </View>
   );
