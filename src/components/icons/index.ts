@@ -13,3 +13,6 @@ export * from './AdjustmentIcon';
 export * from './ThreeDotsIcon';
 export * from './CirclePencil';
 export * from './InfoSquareRoundedIcon';
+export * from './ViewModuleIcon';
+export * from './HearIcon';
+export * from './FilterListRoundedIcon';
