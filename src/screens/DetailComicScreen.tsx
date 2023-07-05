@@ -11,7 +11,7 @@ import ChapterList from '~/components/partials/ChapterList';
 export default function DetailComicScreen() {
   return (
     <CustomSafeArea>
-      <ScrollView className='flex-1 p-2 '>
+      <ScrollView className='flex-1 p-2'>
         <BackHeader
           withoutTitle
           buttonStyles='p-1 bg-white/20 rounded-full'
