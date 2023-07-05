@@ -8,4 +8,5 @@ export interface RootStackParamsList extends ParamListBase {
   HomeScreen: {};
   GenresScreen: undefined;
   PopularScreen: undefined;
+  DetailComic: undefined;
 }

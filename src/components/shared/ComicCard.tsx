@@ -1,10 +1,18 @@
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image';
 import { BookOpenRoundedIcon } from '~/components/icons';
+import { useAppNavigation } from '~/hooks/navigationHooks';
 
 export default function ComicCard() {
+  const navigation = useAppNavigation();
+
   return (
-    <View className='flex-col h-[350] w-[200] mr-6'>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('ComicLayout', { screen: 'DetailComic' })
+      }
+      className='flex-col h-[350] w-[180] mr-6'
+    >
       <Image
         className='rounded-xl'
         cachePolicy='memory-disk'
@@ -28,6 +36,6 @@ export default function ComicCard() {
         <BookOpenRoundedIcon width={16} height={16} className='text-gray-400' />
         <Text className='ml-2 text-gray-400'>Chapter 400</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

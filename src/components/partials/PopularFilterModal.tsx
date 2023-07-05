@@ -43,21 +43,21 @@ export default function PopularFilterModal() {
 
           <TouchableOpacity
             onPress={() => setShowPopover(false)}
-            className='w-[125] px-4 py-3 border border-gray-400 rounded-lg'
+            className='w-[125] px-4 py-3 bg-white/10 rounded-lg'
           >
             <Text className='text-gray-300 text-center'>Theo tháng</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => setShowPopover(false)}
-            className='w-[125] px-4 py-3 border border-gray-400 rounded-lg'
+            className='w-[125] px-4 py-3 bg-white/10 rounded-lg'
           >
             <Text className='text-gray-300 text-center'>Theo tuần</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => setShowPopover(false)}
-            className='w-[125] px-4 py-3 border border-gray-400 rounded-lg'
+            className='w-[125] px-4 py-3 bg-white/10 rounded-lg'
           >
             <Text className='text-gray-300 text-center'>Theo ngày</Text>
           </TouchableOpacity>
