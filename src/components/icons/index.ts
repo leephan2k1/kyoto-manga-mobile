@@ -10,3 +10,6 @@ export * from './MagnifyingIcon';
 export * from './BookOpenRoundedIcon';
 export * from './ChevronLeftIcon';
 export * from './AdjustmentIcon';
+export * from './ThreeDotsIcon';
+export * from './CirclePencil';
+export * from './InfoSquareRoundedIcon';
