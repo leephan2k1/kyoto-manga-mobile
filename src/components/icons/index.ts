@@ -17,3 +17,5 @@ export * from './ViewModuleIcon';
 export * from './HearIcon';
 export * from './FilterListRoundedIcon';
 export * from './CheckIcon';
+export * from './FolderIcon';
+export * from './HistoryIcon';

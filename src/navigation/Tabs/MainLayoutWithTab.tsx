@@ -10,6 +10,7 @@ import HomeStackScreen from '~/navigation/stacks/HomeStack';
 import SettingsScreen from '~/screens/SettingsScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SearchScreen from '~/screens/SearchScreen';
+import BookmarkScreen from '~/screens/BookmarkScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -62,7 +63,7 @@ export default function MainLayoutWithTab() {
         name={'Home'}
         component={HomeStackScreen}
       />
-      <Tab.Screen name={'Bookmark'} component={SettingsScreen} />
+      <Tab.Screen name={'Bookmark'} component={BookmarkScreen} />
       <Tab.Screen name={'Search'} component={SearchScreen} />
       <Tab.Screen name={'Profile'} component={SettingsScreen} />
     </Tab.Navigator>
