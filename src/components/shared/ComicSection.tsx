@@ -17,7 +17,9 @@ export default function ComicSection({ title }: { title: string }) {
         showsHorizontalScrollIndicator={false}
         data={[1, 2, 3, 4, 5]}
         renderItem={(item) => {
-          return <ComicCard />;
+          return (
+            <ComicCard cardLayout='full-grid' style={{ marginRight: 20 }} />
+          );
         }}
       />
     </View>

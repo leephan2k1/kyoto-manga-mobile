@@ -11,7 +11,8 @@ import {
 import { ChevronLeftIcon } from '~/components/icons';
 import { CheckboxWithLabel } from '~/components/shared/CheckBox';
 
-interface SearchModalFiltersProps extends SheetModalProps {}
+interface SearchModalFiltersProps
+  extends Pick<SheetModalProps, 'open' | 'setOpenSheetFilter'> {}
 function SearchModalFilters({
   open,
   setOpenSheetFilter,

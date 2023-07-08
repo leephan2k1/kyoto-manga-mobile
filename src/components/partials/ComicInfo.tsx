@@ -16,12 +16,12 @@ export default function ComicInfo() {
 
       <View className='flex-row items-center space-x-2'>
         <View className='w-[18] h-[18] flex items-center justify-center'>
-          <Animatable.Text
-            className='p-1 rounded-full bg-green-600 w-1 h-1'
+          <Animatable.View
+            className='p-1 bg-green-600 w-1 h-1 rounded-full'
             animation='pulse'
             easing='ease-out'
             iterationCount='infinite'
-          ></Animatable.Text>
+          ></Animatable.View>
         </View>
 
         <Text className='text-gray-400'>Đang tiến hành</Text>
