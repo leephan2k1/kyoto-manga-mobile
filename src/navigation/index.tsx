@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MainLayoutWithTab from '~/navigation/Tabs/MainLayoutWithTab';
+import MainLayoutWithTab from '~/navigation/tabs/MainLayoutWithTab';
 import ComicLayoutStack from '~/navigation/stacks/ComicLayoutStack';
 
 const Stack = createNativeStackNavigator();
