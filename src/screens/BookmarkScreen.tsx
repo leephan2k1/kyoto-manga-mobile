@@ -7,8 +7,10 @@ import { CardLayout } from '~/common/types/cardLayouts';
 import LayoutFilters from '~/components/shared/LayoutFilters';
 import { Search, X } from 'react-native-feather';
 import SearchInput from '~/components/shared/SearchInput';
+import { useAppNavigation } from '~/hooks/navigationHooks';
 
 export default function BookmarkScreen() {
+  const navigation = useAppNavigation();
   const [cardLayout, setCardLayout] = useState<CardLayout>('grid');
   const [showInput, setShowInput] = useState(false);
 
@@ -46,12 +48,18 @@ export default function BookmarkScreen() {
         )}
 
         <View className='w-full flex-row items-center justify-center mb-2'>
-          <TouchableOpacity className='w-[45%] mr-4 p-4 border border-gray-500 rounded-xl flex-row justify-between'>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CollectionScreen')}
+            className='w-[45%] mr-4 p-4 border border-gray-500 rounded-xl flex-row justify-between'
+          >
             <FolderIcon width={18} height={18} className='text-primary mr-4' />
             <Text className='text-white'>Bộ sưu tập</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity className='w-[45%] p-4 border border-gray-500 rounded-xl flex-row justify-between'>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('HistoryScreen')}
+            className='w-[45%] p-4 border border-gray-500 rounded-xl flex-row justify-between'
+          >
             <HistoryIcon width={18} height={18} className='text-primary mr-4' />
             <Text className='text-white'>Lịch sử</Text>
           </TouchableOpacity>
