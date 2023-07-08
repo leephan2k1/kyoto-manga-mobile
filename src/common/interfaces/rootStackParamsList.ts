@@ -9,4 +9,7 @@ export interface RootStackParamsList extends ParamListBase {
   GenresScreen: undefined;
   PopularScreen: undefined;
   DetailComic: undefined;
+  BookmarkScreen: undefined;
+  CollectionScreen: undefined;
+  HistoryScreen: undefined;
 }
