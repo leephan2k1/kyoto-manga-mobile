@@ -2,8 +2,13 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PropsWithChildren } from 'react';
 
-interface CustomSafeAreaProps extends PropsWithChildren {}
-export default function CustomSafeArea({ children }: CustomSafeAreaProps) {
+interface CustomSafeAreaProps extends PropsWithChildren {
+  exclude?: 'top' | 'bottom' | 'left' | 'right';
+}
+export default function CustomSafeArea({
+  children,
+  exclude,
+}: CustomSafeAreaProps) {
   const insets = useSafeAreaInsets();
 
   //react navigation recommend using hook instead of SafeAreView component
@@ -13,10 +18,10 @@ export default function CustomSafeArea({ children }: CustomSafeAreaProps) {
       style={{
         flex: 1,
         // Paddings to handle safe area
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
-        paddingLeft: insets.left,
-        paddingRight: insets.right,
+        paddingTop: exclude === 'top' ? undefined : insets.top,
+        paddingBottom: exclude === 'bottom' ? undefined : insets.bottom,
+        paddingLeft: exclude === 'left' ? undefined : insets.left,
+        paddingRight: exclude === 'right' ? undefined : insets.right,
         backgroundColor: 'black',
       }}
     >
