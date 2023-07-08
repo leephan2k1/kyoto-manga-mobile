@@ -1,14 +1,23 @@
 import {
   NativeSyntheticEvent,
+  StyleProp,
   TextInput,
   TextInputChangeEventData,
+  TextInputProps,
   TouchableHighlight,
   View,
+  ViewStyle,
 } from 'react-native';
 import { Search, X } from 'react-native-feather';
 import { useState } from 'react';
 
-export default function SearchInput() {
+export default function SearchInput({
+  style,
+  textInputProps,
+}: {
+  textInputProps?: TextInputProps;
+  style?: StyleProp<ViewStyle>;
+}) {
   const [searchText, setSearchText] = useState('');
 
   const handleOnChangeInput = (
@@ -20,8 +29,12 @@ export default function SearchInput() {
   };
 
   return (
-    <View className='h-[45] flex-row items-center border border-gray-500 rounded-xl w-[60%] overflow-hidden pr-1'>
+    <View
+      style={style}
+      className='h-[45] flex-row items-center bg-[#1f1f1f] rounded-xl overflow-hidden pr-1'
+    >
       <TextInput
+        {...textInputProps}
         className='placeholder-white w-[90%] h-full p-2'
         placeholder='Tìm kiếm...'
         placeholderTextColor='#fff'

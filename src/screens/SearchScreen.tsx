@@ -18,7 +18,7 @@ export default function SearchScreen() {
     <CustomSafeArea exclude={'bottom'}>
       <View className='flex-1 p-2'>
         <View className='w-full items-center justify-between flex-row my-2'>
-          <SearchInput />
+          <SearchInput style={{ width: '60%' }} />
 
           <View className='flex-row space-x-2'>
             <LayoutFilters
