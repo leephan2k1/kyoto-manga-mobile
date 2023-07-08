@@ -1,12 +1,28 @@
 import { FlatList } from 'react-native';
-import React, { memo } from 'react';
+import React, {
+  ComponentType,
+  JSXElementConstructor,
+  memo,
+  ReactElement,
+} from 'react';
 import ComicCard from '~/components/shared/ComicCard';
 import { CardLayout } from '~/common/types/cardLayouts';
 
-function ComicsList({ cardLayout }: { cardLayout: CardLayout }) {
+function ComicsList({
+  listHeaderComp,
+  cardLayout,
+}: {
+  cardLayout: CardLayout;
+  listHeaderComp?:
+    | ComponentType<any>
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | null
+    | undefined;
+}) {
   if (cardLayout === 'list') {
     return (
       <FlatList
+        ListHeaderComponent={listHeaderComp}
         key={cardLayout}
         style={{ borderRadius: 10 }}
         showsVerticalScrollIndicator={false}
@@ -26,6 +42,7 @@ function ComicsList({ cardLayout }: { cardLayout: CardLayout }) {
 
   return (
     <FlatList
+      ListHeaderComponent={listHeaderComp}
       key={cardLayout}
       style={{ borderRadius: 10 }}
       showsVerticalScrollIndicator={false}
