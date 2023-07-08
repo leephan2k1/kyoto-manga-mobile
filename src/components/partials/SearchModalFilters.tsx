@@ -12,18 +12,15 @@ import { ChevronLeftIcon } from '~/components/icons';
 import { CheckboxWithLabel } from '~/components/shared/CheckBox';
 
 interface SearchModalFiltersProps
-  extends Pick<SheetModalProps, 'open' | 'setOpenSheetFilter'> {}
-function SearchModalFilters({
-  open,
-  setOpenSheetFilter,
-}: SearchModalFiltersProps) {
+  extends Pick<SheetModalProps, 'open' | 'setOpenSheet'> {}
+function SearchModalFilters({ open, setOpenSheet }: SearchModalFiltersProps) {
   const [dynamicSnapPoints, setDynamicSnapPoints] = useState<number>(65);
 
   return (
     <SheetModal
       snapPoints={[dynamicSnapPoints]}
       open={open}
-      setOpenSheetFilter={setOpenSheetFilter}
+      setOpenSheet={setOpenSheet}
     >
       <View className='w-full flex-row justify-end mb-4'>
         <TouchableHighlight className='bg-primary/50 w-fit py-3 px-3 rounded-3xl'>

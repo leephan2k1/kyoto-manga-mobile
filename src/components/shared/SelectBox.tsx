@@ -15,7 +15,7 @@ export function SelectBox({
   items,
   ...props
 }: SelectBoxProps) {
-  const [val, setVal] = useState('Guava');
+  const [val, setVal] = useState(items[0].value);
 
   return (
     <Select value={val} onValueChange={setVal} {...props}>

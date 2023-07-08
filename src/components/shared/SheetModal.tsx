@@ -4,14 +4,14 @@ import { Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
 export interface SheetModalProps extends PropsWithChildren {
   open: boolean;
   snapPoints: number[];
-  setOpenSheetFilter: Dispatch<SetStateAction<boolean>>;
+  setOpenSheet: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function SheetModal({
   children,
   snapPoints,
   open,
-  setOpenSheetFilter,
+  setOpenSheet,
 }: SheetModalProps) {
   const [position, setPosition] = useState(0);
   const [modal, setModal] = useState(true);
@@ -23,7 +23,7 @@ export default function SheetModal({
         forceRemoveScrollEnabled={open}
         modal={true}
         open={open}
-        onOpenChange={setOpenSheetFilter}
+        onOpenChange={setOpenSheet}
         snapPoints={snapPoints}
         dismissOnSnapToBottom
         position={position}
