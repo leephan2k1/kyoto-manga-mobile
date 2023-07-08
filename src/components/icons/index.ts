@@ -16,3 +16,4 @@ export * from './InfoSquareRoundedIcon';
 export * from './ViewModuleIcon';
 export * from './HearIcon';
 export * from './FilterListRoundedIcon';
+export * from './CheckIcon';
