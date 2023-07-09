@@ -22,3 +22,4 @@ export * from './HistoryIcon';
 export * from './MinusIcon';
 export * from './TrashIcon';
 export * from './GarbageIcon';
+export * from './CogIcon';
