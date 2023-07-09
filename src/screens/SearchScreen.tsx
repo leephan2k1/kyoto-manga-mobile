@@ -36,7 +36,7 @@ export default function SearchScreen() {
 
         <SearchModalFilters
           open={openSheetFilters}
-          setOpenSheetFilter={setOpenSheetFilter}
+          setOpenSheet={setOpenSheetFilter}
         />
 
         <ComicsList cardLayout={cardLayout} />
