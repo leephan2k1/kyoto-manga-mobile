@@ -1,5 +1,6 @@
 import {
   NativeSyntheticEvent,
+  ScrollView,
   Text,
   TextInput,
   TextInputChangeEventData,
@@ -7,13 +8,18 @@ import {
   View,
 } from 'react-native';
 import SheetModal, { SheetModalProps } from '~/components/shared/SheetModal';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SelectBox } from '~/components/shared/SelectBox';
+import ComicCard from '~/components/shared/ComicCard';
+import { MinusIcon } from '~/components/icons';
 
 interface AddCollectionModalProps
-  extends Pick<SheetModalProps, 'open' | 'setOpenSheet'> {}
+  extends Pick<SheetModalProps, 'open' | 'setOpenSheet'> {
+  editMode?: boolean;
+}
 export default function AddCollectionModal({
   open,
+  editMode,
   setOpenSheet,
 }: AddCollectionModalProps) {
   const [searchText, setSearchText] = useState('');
@@ -37,10 +43,17 @@ export default function AddCollectionModal({
   }, [open]);
 
   return (
-    <SheetModal snapPoints={[70]} open={open} setOpenSheet={setOpenSheet}>
+    <SheetModal
+      disableDrag={Boolean(editMode)}
+      snapPoints={editMode ? [80] : [70]}
+      open={open}
+      setOpenSheet={setOpenSheet}
+    >
       <View className='flex-1 justify-between'>
-        <View className='flex-col w-full h-[70%]'>
-          <Text className='text-white text-lg mt-4'>Thêm bộ sưu tập</Text>
+        <View className='flex-col w-full h-[80%]'>
+          <Text className='text-white text-lg mt-4'>
+            {editMode ? 'Sửa bộ sưu tập' : 'Thêm bộ sưu tập'}{' '}
+          </Text>
 
           <TextInput
             className='placeholder-white w-[90%] mt-4 bg-white/10 h-[50] rounded-xl p-2'
@@ -73,9 +86,36 @@ export default function AddCollectionModal({
               ]}
             />
           </View>
+
+          {editMode && (
+            <ScrollView nestedScrollEnabled={true}>
+              <View className='flex-row items-center'>
+                <TouchableOpacity
+                  onPress={() => {
+                    console.log('delete item');
+                  }}
+                  className='flex-row items-center justify-center p-2 h-6 w-6 bg-rose-500 rounded-full mr-4'
+                >
+                  <MinusIcon width={16} height={16} className='text-white' />
+                </TouchableOpacity>
+                <ComicCard cardLayout='list' />
+              </View>
+              <View className='flex-row items-center'>
+                <TouchableOpacity
+                  onPress={() => {
+                    console.log('delete item');
+                  }}
+                  className='flex-row items-center justify-center p-2 h-6 w-6 bg-rose-500 rounded-full mr-4'
+                >
+                  <MinusIcon width={16} height={16} className='text-white' />
+                </TouchableOpacity>
+                <ComicCard cardLayout='list' />
+              </View>
+            </ScrollView>
+          )}
         </View>
 
-        <View className='w-full items-end justify-center mb-10'>
+        <View className='w-full items-end justify-center mb-10 '>
           <TouchableOpacity className='p-4 rounded-xl bg-primary/20 w-[80]'>
             <Text className='text-primary text-center'>Lưu</Text>
           </TouchableOpacity>

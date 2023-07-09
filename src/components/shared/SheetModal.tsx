@@ -2,12 +2,14 @@ import { Sheet } from '@tamagui/sheet';
 import { Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
 
 export interface SheetModalProps extends PropsWithChildren {
+  disableDrag?: boolean;
   open: boolean;
   snapPoints: number[];
   setOpenSheet: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function SheetModal({
+  disableDrag,
   children,
   snapPoints,
   open,
@@ -20,6 +22,7 @@ export default function SheetModal({
   return (
     <>
       <Sheet
+        disableDrag={disableDrag}
         forceRemoveScrollEnabled={open}
         modal={true}
         open={open}

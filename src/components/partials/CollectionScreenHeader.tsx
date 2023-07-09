@@ -1,11 +1,16 @@
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Edit2, Plus } from 'react-native-feather';
 import CollectionCard from '~/components/partials/CollectionCard';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LazyComponent from '@r0b0t3d/react-native-lazy-component';
 
 export default function CollectionScreenHeader() {
   const [showAddCollectionModal, setShowAddCollectionModal] = useState(false);
+  const [isEditMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    if (!showAddCollectionModal) setEditMode(false);
+  }, [showAddCollectionModal]);
 
   return (
     <View>
@@ -13,6 +18,7 @@ export default function CollectionScreenHeader() {
         /*@ts-ignore */
         load={() => import('~/components/partials/AddCollectionModal')}
         open={showAddCollectionModal}
+        editMode={isEditMode}
         setOpenSheet={setShowAddCollectionModal}
       />
 
@@ -29,7 +35,13 @@ export default function CollectionScreenHeader() {
           <Text className='text-white'>Thêm mới</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className='w-[46%] p-4 border border-gray-500 rounded-xl flex-row justify-between'>
+        <TouchableOpacity
+          onPress={() => {
+            setShowAddCollectionModal(true);
+            setEditMode(true);
+          }}
+          className='w-[46%] p-4 border border-gray-500 rounded-xl flex-row justify-between'
+        >
           <Edit2 width={18} height={18} className='text-primary mr-4' />
           <Text className='text-white'>Chỉnh sửa</Text>
         </TouchableOpacity>
