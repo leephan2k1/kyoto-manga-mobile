@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import React, {
   ComponentType,
   JSXElementConstructor,
@@ -7,11 +7,14 @@ import React, {
 } from 'react';
 import ComicCard from '~/components/shared/ComicCard';
 import { CardLayout } from '~/common/types/cardLayouts';
+import { GarbageIcon } from '~/components/icons';
 
 function ComicsList({
   listHeaderComp,
   cardLayout,
+  deleteMode,
 }: {
+  deleteMode?: boolean;
   cardLayout: CardLayout;
   listHeaderComp?:
     | ComponentType<any>
@@ -31,6 +34,17 @@ function ComicsList({
         renderItem={({ item, index }) => {
           return (
             <ComicCard
+              CornerButton={
+                deleteMode ? (
+                  <TouchableOpacity className='z-50 absolute bottom-0 right-2 bg-black/50 p-3 rounded-full'>
+                    <GarbageIcon
+                      width={16}
+                      height={16}
+                      className='text-white'
+                    />
+                  </TouchableOpacity>
+                ) : undefined
+              }
               cardLayout={cardLayout}
               style={{ marginRight: index % 2 == 0 ? 22 : 0 }}
             />
@@ -53,6 +67,13 @@ function ComicsList({
       renderItem={({ item, index }) => {
         return (
           <ComicCard
+            CornerButton={
+              deleteMode ? (
+                <TouchableOpacity className='z-50 absolute top-2 right-2 bg-black/50 p-3 rounded-full'>
+                  <GarbageIcon width={16} height={16} className='text-white' />
+                </TouchableOpacity>
+              ) : undefined
+            }
             cardLayout={cardLayout}
             style={{ marginRight: index % 2 == 0 ? 22 : 0 }}
           />

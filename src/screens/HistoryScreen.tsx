@@ -39,6 +39,7 @@ export default function HistoryScreen() {
         </BackHeader>
 
         <ComicsList
+          deleteMode
           listHeaderComp={() => (
             <View>
               <Text className='text-3xl text-bold text-white ml-2 my-4'>

@@ -10,12 +10,18 @@ import { BookOpenRoundedIcon } from '~/components/icons';
 import { useAppNavigation } from '~/hooks/navigationHooks';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CardLayout } from '~/common/types/cardLayouts';
+import { ReactNode } from 'react';
 
 interface ComicCardProps {
   cardLayout: CardLayout;
   style?: StyleProp<ViewStyle>;
+  CornerButton?: ReactNode;
 }
-export default function ComicCard({ cardLayout, style }: ComicCardProps) {
+export default function ComicCard({
+  cardLayout,
+  style,
+  CornerButton,
+}: ComicCardProps) {
   const navigation = useAppNavigation();
 
   if (cardLayout === 'list') {
@@ -24,8 +30,10 @@ export default function ComicCard({ cardLayout, style }: ComicCardProps) {
         onPress={() =>
           navigation.navigate('ComicLayout', { screen: 'DetailComic' })
         }
-        className='flex-row w-full h-[80] my-2'
+        className='relative flex-row w-full h-[80] my-2'
       >
+        {CornerButton}
+
         <Image
           className='rounded-lg'
           cachePolicy='memory-disk'
@@ -59,10 +67,12 @@ export default function ComicCard({ cardLayout, style }: ComicCardProps) {
         navigation.navigate('ComicLayout', { screen: 'DetailComic' })
       }
       style={style}
-      className={` flex-col ${
+      className={`relative flex-col ${
         cardLayout === 'full-grid' ? 'h-[350]' : 'h-[280]'
       } ${cardLayout === 'full-grid' ? 'w-[180]' : 'w-[165]'} relative`}
     >
+      {CornerButton}
+
       <Image
         className='rounded-xl'
         cachePolicy='memory-disk'
