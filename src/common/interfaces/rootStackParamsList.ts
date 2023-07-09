@@ -2,7 +2,7 @@ import { ParamListBase } from '@react-navigation/native';
 
 export interface RootStackParamsList extends ParamListBase {
   Home: {};
-  Profile: {};
+  Settings: {};
   Search: {};
   Bookmark: {};
   HomeScreen: {};

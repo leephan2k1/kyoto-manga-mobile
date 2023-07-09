@@ -1,9 +1,9 @@
 import { Platform, Text } from 'react-native';
 import {
   BookmarkIcon,
+  CogIcon,
   HomeIcon,
   MagnifyingIcon,
-  UserIcon,
 } from '~/components/icons';
 import { TAB_BAR_MAPPING } from '~/common/constants';
 import HomeStackScreen from '~/navigation/stacks/HomeStack';
@@ -23,8 +23,8 @@ export default function MainLayoutWithTab() {
             return <HomeIcon width={24} height={24} color={color} />;
           }
 
-          if (route.name === 'Profile') {
-            return <UserIcon width={24} height={24} color={color} />;
+          if (route.name === 'Settings') {
+            return <CogIcon width={24} height={24} color={color} />;
           }
 
           if (route.name === 'Search') {
@@ -65,7 +65,7 @@ export default function MainLayoutWithTab() {
       />
       <Tab.Screen name={'Bookmark'} component={BookmarkStackScreen} />
       <Tab.Screen name={'Search'} component={SearchScreen} />
-      <Tab.Screen name={'Profile'} component={SettingsScreen} />
+      <Tab.Screen name={'Settings'} component={SettingsScreen} />
     </Tab.Navigator>
   );
 }
