@@ -39,6 +39,7 @@ export default function CollectionScreenHeader() {
           onPress={() => {
             setShowAddCollectionModal(true);
             setEditMode(true);
+            console.log('log edit');
           }}
           className='w-[46%] p-4 border border-gray-500 rounded-xl flex-row justify-between'
         >

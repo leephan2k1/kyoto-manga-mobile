@@ -10,8 +10,8 @@ import {
 import SheetModal, { SheetModalProps } from '~/components/shared/SheetModal';
 import React, { useEffect, useState } from 'react';
 import { SelectBox } from '~/components/shared/SelectBox';
-import ComicCard from '~/components/shared/ComicCard';
 import { MinusIcon } from '~/components/icons';
+import ComicCard from '~/components/shared/ComicCard';
 
 interface AddCollectionModalProps
   extends Pick<SheetModalProps, 'open' | 'setOpenSheet'> {

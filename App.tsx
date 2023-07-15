@@ -5,6 +5,7 @@ import Navigation from '~/navigation';
 import { TamaguiProvider } from 'tamagui';
 import tamaguiConfig from './tamagui.config';
 import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -17,12 +18,14 @@ export default function App() {
   }
 
   return (
-    <StoreProvider store={store}>
-      <TamaguiProvider config={tamaguiConfig}>
-        <SafeAreaProvider>
-          <Navigation />
-        </SafeAreaProvider>
-      </TamaguiProvider>
-    </StoreProvider>
+    <NavigationContainer>
+      <StoreProvider store={store}>
+        <TamaguiProvider config={tamaguiConfig}>
+          <SafeAreaProvider>
+            <Navigation />
+          </SafeAreaProvider>
+        </TamaguiProvider>
+      </StoreProvider>
+    </NavigationContainer>
   );
 }
