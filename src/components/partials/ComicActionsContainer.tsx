@@ -4,12 +4,18 @@ import {
   BookOpenRoundedIcon,
   InfoSquareRoundedIcon,
 } from '~/components/icons';
+import { useAppNavigation } from '~/hooks/navigationHooks';
 
 export default function ComicActionsContainer() {
+  const navigation = useAppNavigation();
+
   return (
     <View className='fit w-full my-4'>
       <View className='w-[85%] flex-col mx-auto'>
-        <TouchableOpacity className='flex-row items-center justify-center space-x-2 w-full p-4 bg-primary rounded-xl'>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ReadingComic')}
+          className='flex-row items-center justify-center space-x-2 w-full p-4 bg-primary rounded-xl'
+        >
           <BookOpenRoundedIcon width={20} height={20} className='text-black' />
           <Text className='text-black font-bold text-base'>Đọc ngay</Text>
         </TouchableOpacity>

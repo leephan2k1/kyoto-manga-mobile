@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DetailComicScreen from '~/screens/DetailComicScreen';
+import ReadingScreen from '~/screens/ReadingScreen';
 
 const ComicStack = createNativeStackNavigator();
 
@@ -11,6 +12,7 @@ export default function ComicLayoutStack() {
       }}
     >
       <ComicStack.Screen name={'DetailComic'} component={DetailComicScreen} />
+      <ComicStack.Screen name={'ReadingComic'} component={ReadingScreen} />
     </ComicStack.Navigator>
   );
 }

@@ -12,4 +12,5 @@ export interface RootStackParamsList extends ParamListBase {
   BookmarkScreen: undefined;
   CollectionScreen: undefined;
   HistoryScreen: undefined;
+  ReadingComic: undefined;
 }
