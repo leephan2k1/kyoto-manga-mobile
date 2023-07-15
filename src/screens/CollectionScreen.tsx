@@ -11,7 +11,7 @@ export default function CollectionScreen() {
   const [cardLayout, setCardLayout] = useState<CardLayout>('grid');
 
   return (
-    <CustomSafeArea exclude='bottom'>
+    <CustomSafeArea excludes={{ bottom: true }}>
       <View className='flex-1 px-2 py-4'>
         <BackHeader>
           <LayoutFilters

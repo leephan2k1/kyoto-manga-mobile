@@ -15,7 +15,7 @@ export default function SearchScreen() {
   const [cardLayout, setCardLayout] = useState<CardLayout>('grid');
 
   return (
-    <CustomSafeArea exclude={'bottom'}>
+    <CustomSafeArea excludes={{ bottom: true }}>
       <View className='flex-1 p-2'>
         <View className='w-full items-center justify-between flex-row my-2'>
           <SearchInput style={{ width: '60%' }} />
