@@ -55,3 +55,35 @@ export async function parseGenre(data: any): Promise<Genre[]> {
     };
   });
 }
+
+export async function parsePopulation(data: any): Promise<ComicPreview[]> {
+  const document = parse(data);
+
+  const list = document.querySelectorAll('.thumb-item-flow.col-6.col-md-3');
+
+  return list.map((card) => {
+    const title = card
+      .querySelector('.thumb_attr.series-title a')
+      ?.textContent.trim();
+    const url = card
+      .querySelector('.thumb_attr.series-title a')
+      ?.getAttribute('href');
+    const latestChapter = card
+      .querySelector('.thumb_attr.chapter-title.text-truncate a')
+      ?.textContent.trim();
+    const thumbnail = card
+      .querySelector('.content.img-in-ratio')
+      ?.getAttribute('data-bg');
+    const updatedTime = card
+      .querySelector('.manga-badge .badge.badge-info time')
+      ?.textContent.trim();
+
+    return {
+      title: title || '',
+      url: url || '',
+      latestChapter: latestChapter || '',
+      thumbnail: thumbnail || '',
+      updatedTime: updatedTime || '',
+    };
+  });
+}
