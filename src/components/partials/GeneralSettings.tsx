@@ -41,6 +41,16 @@ export default function GeneralSettings() {
           />
         </View>
 
+        <View className='flex-row justify-between items-center w-full border-b-2 border-white/10 py-3'>
+          <Text className='text-white text-base'>Tiết kiệm dữ liệu</Text>
+
+          <ChevronLeftIcon
+            className='text-white rotate-180'
+            width={16}
+            height={16}
+          />
+        </View>
+
         <View className='flex-row justify-between items-center w-full py-3'>
           <Text className='text-white text-base'>Giao diện</Text>
 
