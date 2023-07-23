@@ -1,9 +1,9 @@
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import GenresCard, { GenreSkeleton } from '~/components/shared/GenresCard';
 import { useAppNavigation } from '~/hooks/navigationHooks';
-import { cluster } from 'radash';
 import { getGenresService } from '~/services/getGenres.service';
 import { getDumpArray } from '~/utils/array.util';
+import { cluster } from 'radash';
 
 const LIMIT_ITEMS = 8;
 

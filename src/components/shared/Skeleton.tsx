@@ -4,13 +4,13 @@ import React, { PropsWithChildren, useEffect, useRef } from 'react';
 interface SkeletonProps extends PropsWithChildren {
   width: string | number;
   height: number;
-  className?: string;
+  backgroundColor?: string;
 }
 export default function Skeleton({
   width,
   height,
   children,
-  className,
+  backgroundColor,
 }: SkeletonProps) {
   const opacity = useRef(new Animated.Value(0.3));
 
@@ -33,8 +33,11 @@ export default function Skeleton({
 
   return (
     <Animated.View
-      className={`items-center justify-center flex bg-black/70 rounded-xl`}
-      style={{ opacity: opacity.current, width, height }}
+      style={{
+        opacity: opacity.current,
+        width,
+        height,
+      }}
     >
       {children}
     </Animated.View>

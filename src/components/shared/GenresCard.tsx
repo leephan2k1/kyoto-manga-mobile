@@ -35,8 +35,10 @@ export function GenreSkeleton({ style }: Pick<GenresCardProps, 'style'>) {
       className='w-[180] h-[100] rounded-xl relative  bg-[#1f1f1f] overflow-hidden'
     >
       <View className={'absolute left-[30%] top-2 z-30 p-4 rounded-xl'}>
-        <Skeleton height={50} width={50}>
-          <TorriGate width={30} height={30} />
+        <Skeleton backgroundColor='rgb(0 0 0 / 0.7)' height={50} width={50}>
+          <View className='bg-black/70 w-full h-full rounded-xl items-center justify-center flex'>
+            <TorriGate width={30} height={30} />
+          </View>
         </Skeleton>
       </View>
     </View>
