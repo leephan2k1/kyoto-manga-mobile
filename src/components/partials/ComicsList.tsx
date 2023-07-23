@@ -8,6 +8,7 @@ import React, {
 import ComicCard from '~/components/shared/ComicCard';
 import { CardLayout } from '~/common/types/cardLayouts';
 import { GarbageIcon } from '~/components/icons';
+import { mock_comic_preview } from '~/common/constants';
 
 function ComicsList({
   listHeaderComp,
@@ -34,6 +35,7 @@ function ComicsList({
         renderItem={({ item, index }) => {
           return (
             <ComicCard
+              comicPreview={mock_comic_preview}
               CornerButton={
                 deleteMode ? (
                   <TouchableOpacity className='z-50 absolute bottom-0 right-2 bg-black/50 p-3 rounded-full'>
@@ -67,6 +69,7 @@ function ComicsList({
       renderItem={({ item, index }) => {
         return (
           <ComicCard
+            comicPreview={mock_comic_preview}
             CornerButton={
               deleteMode ? (
                 <TouchableOpacity className='z-50 absolute top-2 right-2 bg-black/50 p-3 rounded-full'>

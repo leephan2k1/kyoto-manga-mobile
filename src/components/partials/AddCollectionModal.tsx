@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { SelectBox } from '~/components/shared/SelectBox';
 import { MinusIcon } from '~/components/icons';
 import ComicCard from '~/components/shared/ComicCard';
+import { mock_comic_preview } from '~/common/constants';
 
 interface AddCollectionModalProps
   extends Pick<SheetModalProps, 'open' | 'setOpenSheet'> {
@@ -98,7 +99,10 @@ export default function AddCollectionModal({
                 >
                   <MinusIcon width={16} height={16} className='text-white' />
                 </TouchableOpacity>
-                <ComicCard cardLayout='list' />
+                <ComicCard
+                  cardLayout='list'
+                  comicPreview={mock_comic_preview}
+                />
               </View>
               <View className='flex-row items-center'>
                 <TouchableOpacity
@@ -109,7 +113,10 @@ export default function AddCollectionModal({
                 >
                   <MinusIcon width={16} height={16} className='text-white' />
                 </TouchableOpacity>
-                <ComicCard cardLayout='list' />
+                <ComicCard
+                  cardLayout='list'
+                  comicPreview={mock_comic_preview}
+                />
               </View>
             </ScrollView>
           )}
