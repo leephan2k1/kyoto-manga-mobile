@@ -1,7 +1,19 @@
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import ComicCard from '~/components/shared/ComicCard';
+import ComicCard, { ComicCardSkeleton } from '~/components/shared/ComicCard';
+import { ComicPreview } from '~/models/Comic';
+import { getDumpArray } from '~/utils/array.util';
 
-export default function ComicSection({ title }: { title: string }) {
+interface ComicSectionProps {
+  title: string;
+  data?: ComicPreview[];
+  status: 'error' | 'loading' | 'idle' | 'success';
+}
+
+export default function ComicSection({
+  title,
+  status,
+  data: comics,
+}: ComicSectionProps) {
   return (
     <View className='flex-col w-full h-fit px-4 py-2'>
       <View className='flex-row justify-between items-center mb-4'>
@@ -12,16 +24,38 @@ export default function ComicSection({ title }: { title: string }) {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={[1, 2, 3, 4, 5]}
-        renderItem={(item) => {
-          return (
-            <ComicCard cardLayout='full-grid' style={{ marginRight: 20 }} />
-          );
-        }}
-      />
+      {comics && comics.length > 0 && (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={comics}
+          renderItem={({ item }) => {
+            return (
+              <ComicCard
+                comicPreview={item}
+                cardLayout='full-grid'
+                style={{ marginRight: 20 }}
+              />
+            );
+          }}
+        />
+      )}
+
+      {(status === 'loading' || !comics) && (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={getDumpArray(6)}
+          renderItem={({ item }) => {
+            return (
+              <ComicCardSkeleton
+                cardLayout='full-grid'
+                style={{ marginRight: 20 }}
+              />
+            );
+          }}
+        />
+      )}
     </View>
   );
 }
