@@ -3,7 +3,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:android": "eas build -p android --profile preview"
   },
   "dependencies": {
     "@iconify-json/ph": "^1.1.5",
@@ -60,5 +61,5 @@
   },
   "version": "1.0.0",
   "private": true,
-  "name": "my-react-native-template"
+  "name": "kyoto-manga-mobile"
 }
