@@ -6,6 +6,9 @@ import { TamaguiProvider } from 'tamagui';
 import tamaguiConfig from './tamagui.config';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -19,13 +22,15 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StoreProvider store={store}>
-        <TamaguiProvider config={tamaguiConfig}>
-          <SafeAreaProvider>
-            <Navigation />
-          </SafeAreaProvider>
-        </TamaguiProvider>
-      </StoreProvider>
+      <QueryClientProvider client={queryClient}>
+        <StoreProvider store={store}>
+          <TamaguiProvider config={tamaguiConfig}>
+            <SafeAreaProvider>
+              <Navigation />
+            </SafeAreaProvider>
+          </TamaguiProvider>
+        </StoreProvider>
+      </QueryClientProvider>
     </NavigationContainer>
   );
 }
