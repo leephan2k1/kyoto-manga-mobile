@@ -2,8 +2,25 @@ import Scraper from '~/libs/Scraper';
 import { AxiosRequestConfig } from 'axios';
 import { IScraper } from '~/libs/IScraper';
 import { parseGenre, parsePopulation, parseSuggestions } from './parser';
+import { Selection } from '~/common/interfaces/selection';
 
 class Nettruyen extends Scraper implements IScraper {
+  sort: Selection[] = [
+    { label: 'Ngày cập nhật', value: '' },
+    { label: 'Truyện mới', value: '15' },
+    { label: 'Top All', value: '10' },
+    { label: 'Top tháng', value: '11' },
+    { label: 'Top tuần', value: '12' },
+    { label: 'Top ngày', value: '13' },
+    { label: 'Top theo dõi', value: '20' },
+    { label: 'Số lượng chapter', value: '30' },
+  ];
+  status: Selection[] = [
+    { label: 'Tất cả', value: '-1' },
+    { label: 'Đang tiến hành', value: '1' },
+    { label: 'Hoàn thành', value: '-2' },
+  ];
+
   private static instance: Nettruyen;
 
   private constructor(

@@ -6,8 +6,22 @@ import {
   parseSuggestions,
 } from '~/extensions/vi/TruyenTranhLH/parser';
 import { IScraper } from '~/libs/IScraper';
+import { Selection } from '~/common/interfaces/selection';
 
 class TruyenTranhLH extends Scraper implements IScraper {
+  sort: Selection[] = [
+    { label: 'A-Z', value: 'az' },
+    { label: 'Z-A', value: 'za' },
+    { label: 'Mới cập nhật', value: 'update' },
+    { label: 'Truyện mới', value: 'new' },
+    { label: 'Xem nhiều', value: 'top' },
+    { label: 'Được thích nhiều', value: 'like' },
+  ];
+  status: Selection[] = [
+    { label: 'Đang tiến hành', value: 'dangtienhanh' },
+    { label: 'Tạm ngưng', value: 'tamngung' },
+    { label: 'Hoàn thành', value: 'hoanthanh' },
+  ];
   private static instance: TruyenTranhLH;
   private constructor(
     baseUrl: string,
