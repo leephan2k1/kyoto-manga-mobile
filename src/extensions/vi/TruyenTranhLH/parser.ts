@@ -26,9 +26,10 @@ export async function parseSuggestions(data: any): Promise<ComicPreview[]> {
     const url = slide
       .querySelector('.thumb_attr.series-title a')
       ?.getAttribute('href');
+    const path = url?.slice(url?.lastIndexOf('/') + 1, url?.length);
 
     return {
-      url,
+      path: path || '',
       updatedTime,
       latestChapter,
       title,
@@ -65,9 +66,12 @@ export async function parsePopulation(data: any): Promise<ComicPreview[]> {
     const title = card
       .querySelector('.thumb_attr.series-title a')
       ?.textContent.trim();
+
     const url = card
       .querySelector('.thumb_attr.series-title a')
       ?.getAttribute('href');
+    const path = url?.slice(url?.lastIndexOf('/') + 1, url?.length);
+
     const latestChapter = card
       .querySelector('.thumb_attr.chapter-title.text-truncate a')
       ?.textContent.trim();
@@ -80,7 +84,7 @@ export async function parsePopulation(data: any): Promise<ComicPreview[]> {
 
     return {
       title: title || '',
-      url: url || '',
+      path: path || '',
       latestChapter: latestChapter || '',
       thumbnail: thumbnail || '',
       updatedTime: updatedTime || '',

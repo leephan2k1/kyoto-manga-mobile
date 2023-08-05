@@ -25,13 +25,14 @@ export async function parseSuggestions(data: any): Promise<ComicPreview[]> {
       ?.textContent.trim();
 
     const url = slide.querySelector('.jtip')?.getAttribute('href');
+    const path = url?.slice(url?.lastIndexOf('/') + 1, url?.length);
 
     return {
       title: title || '',
       updatedTime: updatedTime || '',
       thumbnail: thumbnail || '',
       latestChapter: latestChapter || '',
-      url: url || '',
+      path: path || '',
     };
   });
 }
@@ -63,7 +64,10 @@ export async function parsePopulation(data: any): Promise<ComicPreview[]> {
 
   return slides.map((slide) => {
     const title = slide.querySelector('.jtip')?.textContent.trim();
+
     const url = slide.querySelector('.jtip')?.getAttribute('href');
+    const path = url?.slice(url?.lastIndexOf('/') + 1, url?.length);
+
     const latestChapter = slide
       .querySelector('figure > figcaption > ul > li:nth-child(1) > a')
       ?.textContent.trim();
@@ -76,7 +80,7 @@ export async function parsePopulation(data: any): Promise<ComicPreview[]> {
 
     return {
       title: title || '',
-      url: url || '',
+      path: path || '',
       latestChapter: latestChapter || '',
       thumbnail: thumbnail || '',
       updatedTime: updatedTime || '',
