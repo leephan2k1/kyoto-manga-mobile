@@ -91,3 +91,38 @@ export async function parsePopulation(data: any): Promise<ComicPreview[]> {
     };
   });
 }
+
+export async function parseSearchComic(data: any): Promise<ComicPreview[]> {
+  const document = parse(data);
+
+  const list = document.querySelectorAll('.thumb-item-flow.col-6.col-md-2');
+
+  return list.map((card) => {
+    const title = card
+      .querySelector('.thumb_attr.series-title a')
+      ?.textContent.trim();
+    const url = card
+      .querySelector('.thumb_attr.series-title a')
+      ?.getAttribute('href');
+    const path = url?.slice(url?.lastIndexOf('/') + 1, url?.length);
+    const updatedTime = card
+      .querySelector('.thumb-wrapper.tooltipstered .badge.badge-info time')
+      ?.textContent.trim();
+    const thumbnail = card
+      .querySelector('.thumb-wrapper.tooltipstered a > div > div')
+      ?.getAttribute('data-bg');
+    const latestChapter = card
+      .querySelector(
+        '.thumb-wrapper.tooltipstered > div.thumb-detail > div > a',
+      )
+      ?.textContent.trim();
+
+    return {
+      title: title || '',
+      path: path || '',
+      updatedTime: updatedTime || '',
+      thumbnail: thumbnail || '',
+      latestChapter: latestChapter || '',
+    };
+  });
+}

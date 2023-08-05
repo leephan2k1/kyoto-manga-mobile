@@ -3,8 +3,9 @@ import { AxiosRequestConfig } from 'axios';
 import {
   parseGenre,
   parsePopulation,
+  parseSearchComic,
   parseSuggestions,
-} from '~/extensions/vi/TruyenTranhLH/parser';
+} from './parser';
 import { IScraper } from '~/libs/IScraper';
 import { Selection } from '~/common/interfaces/selection';
 
@@ -29,6 +30,16 @@ class TruyenTranhLH extends Scraper implements IScraper {
     timeout?: number,
   ) {
     super(baseUrl, axiosConfig, timeout);
+  }
+
+  public async searchComic(keyword: string) {
+    const { data } = await this.client.get(`${this.baseUrl}/tim-kiem`, {
+      params: {
+        q: keyword,
+      },
+    });
+
+    return await parseSearchComic(data);
   }
 
   public async getSuggestions() {

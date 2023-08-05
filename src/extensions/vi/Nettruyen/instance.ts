@@ -1,7 +1,7 @@
 import Scraper from '~/libs/Scraper';
 import { AxiosRequestConfig } from 'axios';
 import { IScraper } from '~/libs/IScraper';
-import { parseGenre, parsePopulation, parseSuggestions } from './parser';
+import { parseCommon, parseGenre } from './parser';
 import { Selection } from '~/common/interfaces/selection';
 
 class Nettruyen extends Scraper implements IScraper {
@@ -43,11 +43,21 @@ class Nettruyen extends Scraper implements IScraper {
     return this.instance;
   }
 
+  public async searchComic(keyword: string) {
+    const { data } = await this.client.get(`${this.baseUrl}/tim-truyen`, {
+      params: {
+        keyword,
+      },
+    });
+
+    return await parseCommon(data);
+  }
+
   public async getSuggestions() {
     try {
       const { data } = await this.client.get(`${this.baseUrl}`);
 
-      return await parseSuggestions(data);
+      return await parseCommon(data);
     } catch (e) {
       console.log('getSuggestions error: ', e);
 
@@ -73,7 +83,7 @@ class Nettruyen extends Scraper implements IScraper {
         `${this.baseUrl}/tim-truyen?status=-1&sort=11`,
       );
 
-      return await parsePopulation(data);
+      return await parseCommon(data);
     } catch (e) {
       console.log('getPopulations error: ', e);
 

@@ -11,4 +11,6 @@ export interface IScraper {
   getPopulations: () => Promise<ComicPreview[]>;
 
   getGenres: () => Promise<Genre[]>;
+
+  searchComic: (keyword: string) => Promise<ComicPreview[]>;
 }
