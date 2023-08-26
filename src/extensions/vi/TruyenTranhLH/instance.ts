@@ -8,6 +8,7 @@ import {
 } from './parser';
 import { IScraper } from '~/libs/IScraper';
 import { Selection } from '~/common/interfaces/selection';
+import { ISearchParams } from '~/common/interfaces/ISearchParams';
 
 class TruyenTranhLH extends Scraper implements IScraper {
   sort: Selection[] = [
@@ -19,9 +20,10 @@ class TruyenTranhLH extends Scraper implements IScraper {
     { label: 'Được thích nhiều', value: 'like' },
   ];
   status: Selection[] = [
-    { label: 'Đang tiến hành', value: 'dangtienhanh' },
-    { label: 'Tạm ngưng', value: 'tamngung' },
-    { label: 'Hoàn thành', value: 'hoanthanh' },
+    { label: 'Tất cả', value: '' },
+    { label: 'Đang tiến hành', value: '1' },
+    { label: 'Tạm ngưng', value: '2' },
+    { label: 'Hoàn thành', value: '3' },
   ];
   private static instance: TruyenTranhLH;
   private constructor(
@@ -32,10 +34,20 @@ class TruyenTranhLH extends Scraper implements IScraper {
     super(baseUrl, axiosConfig, timeout);
   }
 
-  public async searchComic(keyword: string) {
+  public async searchComic({
+    keyword,
+    sort,
+    page,
+    status,
+    genre,
+  }: ISearchParams) {
     const { data } = await this.client.get(`${this.baseUrl}/tim-kiem`, {
       params: {
         q: keyword,
+        page,
+        sort,
+        status,
+        accept_genres: genre,
       },
     });
 

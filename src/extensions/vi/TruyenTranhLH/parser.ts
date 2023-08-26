@@ -1,6 +1,7 @@
 import { parse } from 'node-html-parser';
 import { ComicPreview } from '~/models/Comic';
 import { Genre } from '~/models/Genre';
+import { ComicListResponse } from '~/common/interfaces/comicListResponse';
 
 export async function parseSuggestions(data: any): Promise<ComicPreview[]> {
   const document = parse(data);
@@ -46,13 +47,14 @@ export async function parseGenre(data: any): Promise<Genre[]> {
 
   const list = document.querySelectorAll('div.card-body.bg-dark > ul > li');
 
-  return list.map((item) => {
+  return list.map((item, index) => {
     const title = item.querySelector('a')?.textContent.trim();
     const url = item.querySelector('a')?.getAttribute('href');
 
     return {
       title: title || '',
       url: url || '',
+      value: `${index + 1}`,
     };
   });
 }
@@ -92,12 +94,12 @@ export async function parsePopulation(data: any): Promise<ComicPreview[]> {
   });
 }
 
-export async function parseSearchComic(data: any): Promise<ComicPreview[]> {
+export async function parseSearchComic(data: any): Promise<ComicListResponse> {
   const document = parse(data);
 
   const list = document.querySelectorAll('.thumb-item-flow.col-6.col-md-2');
 
-  return list.map((card) => {
+  const comics = list.map((card) => {
     const title = card
       .querySelector('.thumb_attr.series-title a')
       ?.textContent.trim();
@@ -105,16 +107,24 @@ export async function parseSearchComic(data: any): Promise<ComicPreview[]> {
       .querySelector('.thumb_attr.series-title a')
       ?.getAttribute('href');
     const path = url?.slice(url?.lastIndexOf('/') + 1, url?.length);
-    const updatedTime = card
-      .querySelector('.thumb-wrapper.tooltipstered .badge.badge-info time')
-      ?.textContent.trim();
+
+    const updatedTimeDiff = card
+      .querySelector('.thumb-wrapper .badge.badge-info time')
+      ?.getAttribute('datetime');
+
+    const updatedTime = updatedTimeDiff
+      ? `${Math.ceil(
+          (new Date().getTime() - new Date(updatedTimeDiff).getTime()) /
+            (1000 * 3600 * 24),
+        )} ngày`
+      : '';
+
     const thumbnail = card
-      .querySelector('.thumb-wrapper.tooltipstered a > div > div')
+      .querySelector('.thumb-wrapper .content.img-in-ratio.lazyloaded')
       ?.getAttribute('data-bg');
+
     const latestChapter = card
-      .querySelector(
-        '.thumb-wrapper.tooltipstered > div.thumb-detail > div > a',
-      )
+      .querySelector('.thumb-wrapper > .thumb-detail a')
       ?.textContent.trim();
 
     return {
@@ -125,4 +135,29 @@ export async function parseSearchComic(data: any): Promise<ComicPreview[]> {
       latestChapter: latestChapter || '',
     };
   });
+
+  const disabledButton = document.querySelector(
+    '.paging_item.paging_prevnext.next.disabled',
+  );
+  const hasNextPageBtn = document.querySelector(
+    '.paging_item.paging_prevnext.next',
+  );
+  const currentPageDoc = document
+    .querySelector('.paging_item.page_num.current')
+    ?.textContent.trim();
+  const currentPage = currentPageDoc ? Number(currentPageDoc) : 1;
+
+  let hasNextPage = false;
+  // if have a disable button then meaning no more pages to next:
+  if (disabledButton) {
+    hasNextPage = !Boolean(disabledButton);
+  } else if (hasNextPageBtn) {
+    hasNextPage = true;
+  }
+
+  return {
+    comics,
+    currentPage,
+    hasNextPage,
+  };
 }
