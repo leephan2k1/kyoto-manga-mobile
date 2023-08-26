@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Adapt, Select, SelectProps, Sheet, XStack, YStack } from 'tamagui';
 import { LinearGradient } from 'tamagui/linear-gradient';
 import { CheckIcon, ChevronLeftIcon } from '~/components/icons';
@@ -6,19 +6,38 @@ import { CheckIcon, ChevronLeftIcon } from '~/components/icons';
 interface SelectBoxProps extends SelectProps {
   placeholder: string;
   selectLabel: string;
+  selectLabelValue: string;
   items: { name: string; value: string }[];
+  setSelectFilter?: (category: string, value: string) => void;
+  defaultValue?: string;
 }
 
-export function SelectBox({
+function SelectBox({
   placeholder,
   selectLabel,
+  selectLabelValue,
   items,
+  setSelectFilter,
+  defaultValue,
   ...props
 }: SelectBoxProps) {
   const [val, setVal] = useState(items[0].value);
 
+  useEffect(() => {
+    if (defaultValue !== undefined) {
+      setVal(defaultValue);
+    }
+  }, [defaultValue]);
+
+  const onChangeValue = (value: string) => {
+    setVal(value);
+    if (setSelectFilter) {
+      setSelectFilter(selectLabelValue, value);
+    }
+  };
+
   return (
-    <Select value={val} onValueChange={setVal} {...props}>
+    <Select value={val} onValueChange={onChangeValue} {...props}>
       <Select.Trigger
         width={180}
         iconAfter={
@@ -29,7 +48,7 @@ export function SelectBox({
       </Select.Trigger>
 
       <Adapt when='sm' platform='touch'>
-        <Sheet native modal dismissOnSnapToBottom>
+        <Sheet snapPoints={[65]} native modal dismissOnSnapToBottom>
           <Sheet.Frame>
             <Sheet.ScrollView>
               <Adapt.Contents />
@@ -118,3 +137,5 @@ export function SelectBox({
     </Select>
   );
 }
+
+export default memo(SelectBox);

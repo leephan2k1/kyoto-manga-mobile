@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import SheetModal, { SheetModalProps } from '~/components/shared/SheetModal';
 import React, { useEffect, useState } from 'react';
-import { SelectBox } from '~/components/shared/SelectBox';
+import SelectBox from '~/components/shared/SelectBox';
 import { MinusIcon } from '~/components/icons';
 import ComicCard from '~/components/shared/ComicCard';
 import { mock_comic_preview } from '~/common/constants';
@@ -69,6 +69,7 @@ export default function AddCollectionModal({
             <SelectBox
               selectLabel='Sắp xếp theo: '
               placeholder='Sắp xếp theo: '
+              selectLabelValue='sort'
               items={[
                 { name: 'Tên', value: 'name' },
                 { name: 'Ngày thêm', value: 'add-date' },
@@ -80,6 +81,7 @@ export default function AddCollectionModal({
             <Text className='text-white mr-4'>Thứ tự sắp xếp</Text>
             <SelectBox
               selectLabel='Thứ tự sắp xếp: '
+              selectLabelValue='order'
               placeholder='Thứ tự sắp xếp: '
               items={[
                 { name: 'Giảm dần (mới)', value: 'desc' },
