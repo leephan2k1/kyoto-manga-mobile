@@ -2,30 +2,34 @@ import {
   NativeSyntheticEvent,
   StyleProp,
   TextInput,
-  TextInputChangeEventData,
   TextInputProps,
+  TextInputSubmitEditingEventData,
   TouchableHighlight,
   View,
   ViewStyle,
 } from 'react-native';
 import { Search, X } from 'react-native-feather';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
-export default function SearchInput({
+function SearchInput({
   style,
   textInputProps,
+  handleOnSubmit,
+  actionOnClear,
 }: {
+  handleOnSubmit: (value: string) => void;
+  actionOnClear?: () => void;
   textInputProps?: TextInputProps;
   style?: StyleProp<ViewStyle>;
 }) {
   const [searchText, setSearchText] = useState('');
 
-  const handleOnChangeInput = (
-    e: NativeSyntheticEvent<TextInputChangeEventData>,
+  const handleInputSubmit = (
+    e: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
   ) => {
-    const value = e.nativeEvent.text;
-
-    setSearchText(value.trim());
+    if (e.nativeEvent.text) {
+      handleOnSubmit(e.nativeEvent.text.trim());
+    }
   };
 
   return (
@@ -39,11 +43,19 @@ export default function SearchInput({
         placeholder='Tìm kiếm...'
         placeholderTextColor='#fff'
         value={searchText}
-        onChange={(e) => handleOnChangeInput(e)}
+        onChange={(e) => setSearchText(e.nativeEvent.text)}
+        onSubmitEditing={(e) => handleInputSubmit(e)}
       />
 
       {searchText.length > 0 ? (
-        <TouchableHighlight onPress={() => setSearchText('')}>
+        <TouchableHighlight
+          onPress={() => {
+            setSearchText('');
+            if (actionOnClear) {
+              actionOnClear();
+            }
+          }}
+        >
           <X
             width={18}
             height={18}
@@ -60,3 +72,5 @@ export default function SearchInput({
     </View>
   );
 }
+
+export default memo(SearchInput);

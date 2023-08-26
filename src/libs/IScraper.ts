@@ -1,6 +1,8 @@
 import { ComicPreview } from '~/models/Comic';
 import { Genre } from '~/models/Genre';
 import { Selection } from '~/common/interfaces/selection';
+import { ComicListResponse } from '~/common/interfaces/comicListResponse';
+import { ISearchParams } from '~/common/interfaces/ISearchParams';
 
 export interface IScraper {
   status: Selection[];
@@ -12,5 +14,5 @@ export interface IScraper {
 
   getGenres: () => Promise<Genre[]>;
 
-  searchComic: (keyword: string) => Promise<ComicPreview[]>;
+  searchComic: (params: ISearchParams) => Promise<ComicListResponse>;
 }
