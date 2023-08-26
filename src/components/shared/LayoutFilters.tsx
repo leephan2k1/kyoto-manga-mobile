@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, View } from 'react-native';
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import React, { Dispatch, memo, SetStateAction, useRef, useState } from 'react';
 import { ViewModuleIcon } from '~/components/icons';
 import Popover from 'react-native-popover-view';
 import { CardLayout } from '~/common/types/cardLayouts';
@@ -11,7 +11,7 @@ const filters: { value: CardLayout; name: string }[] = [
   { value: 'list', name: 'Danh sách' },
 ];
 
-export default function LayoutFilters({
+function LayoutFilters({
   setCardLayout,
   cardLayout,
 }: {
@@ -77,3 +77,5 @@ export default function LayoutFilters({
     </>
   );
 }
+
+export default memo(LayoutFilters);

@@ -14,8 +14,10 @@ export default function BookmarkScreen() {
   const [cardLayout, setCardLayout] = useState<CardLayout>('grid');
   const [showInput, setShowInput] = useState(false);
 
+  const handleOnSubmit = (value: string) => {};
+
   return (
-    <CustomSafeArea>
+    <CustomSafeArea excludes={{ bottom: true }}>
       <View className='p-2'>
         <View className='justify-between items-center flex-row px-2'>
           <Text className='text-3xl text-bold text-white ml-2 my-4'>
@@ -43,7 +45,10 @@ export default function BookmarkScreen() {
 
         {showInput && (
           <View className='w-full mb-3 px-2 items-center justify-center'>
-            <SearchInput textInputProps={{ autoFocus: true }} />
+            <SearchInput
+              handleOnSubmit={handleOnSubmit}
+              textInputProps={{ autoFocus: true }}
+            />
           </View>
         )}
 
@@ -65,7 +70,9 @@ export default function BookmarkScreen() {
           </TouchableOpacity>
         </View>
 
-        <ComicsList cardLayout={cardLayout} />
+        <View className='flex items-start justify-center pb-64 px-2'>
+          <ComicsList cardLayout={cardLayout} />
+        </View>
       </View>
     </CustomSafeArea>
   );

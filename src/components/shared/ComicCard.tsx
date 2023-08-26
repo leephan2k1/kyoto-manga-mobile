@@ -69,8 +69,8 @@ function ComicCard({
       }
       style={style}
       className={`relative flex-col ${
-        cardLayout === 'full-grid' ? 'h-[340]' : 'h-[280]'
-      } ${cardLayout === 'full-grid' ? 'w-[180]' : 'w-[165]'} relative`}
+        cardLayout === 'full-grid' ? 'h-[340]' : 'h-[300]'
+      } ${cardLayout === 'full-grid' ? 'w-[180]' : 'w-[175]'}`}
     >
       {CornerButton}
 
@@ -89,11 +89,12 @@ function ComicCard({
       {cardLayout !== 'thumbnail-grid' && (
         <>
           {cardLayout === 'grid' && (
-            <View className='absolute w-full h-fit bottom-0 pb-4'>
+            <View className='absolute w-full h-[30%] flex flex-col justify-end bottom-0 pb-4'>
               <LinearGradient
-                className='absolute bottom-0 left-0 z-40 w-full h-[100%] rotate-180'
+                className='absolute -bottom-2 left-0 z-40 w-full h-[180%] rotate-180'
                 colors={['rgba(0,0,0,1)', 'transparent']}
               />
+
               <Text
                 ellipsizeMode='tail'
                 numberOfLines={2}
@@ -107,7 +108,11 @@ function ComicCard({
                   height={16}
                   className='text-white'
                 />
-                <Text className='ml-2 text-white'>
+                <Text
+                  ellipsizeMode='tail'
+                  numberOfLines={1}
+                  className='ml-2 text-white w-[85%]'
+                >
                   {comicPreview.latestChapter}
                 </Text>
               </View>
@@ -129,7 +134,11 @@ function ComicCard({
                   height={16}
                   className='text-gray-400'
                 />
-                <Text className='ml-2 text-gray-400'>
+                <Text
+                  ellipsizeMode='tail'
+                  numberOfLines={1}
+                  className='ml-2 text-gray-400 w-[85%]'
+                >
                   {comicPreview.latestChapter}
                 </Text>
               </View>
