@@ -1,6 +1,6 @@
 import SheetModal, { SheetModalProps } from '~/components/shared/SheetModal';
-import { memo, useState } from 'react';
-import { SelectBox } from '~/components/shared/SelectBox';
+import { Dispatch, memo, SetStateAction, useCallback, useState } from 'react';
+import SelectBox from '~/components/shared/SelectBox';
 import {
   ScrollView,
   Text,
@@ -9,21 +9,76 @@ import {
   View,
 } from 'react-native';
 import { ChevronLeftIcon } from '~/components/icons';
-import { CheckboxWithLabel } from '~/components/shared/CheckBox';
+import RadioGroupItemWithLabel from '~/components/shared/RadioBox';
+import { RadioGroup } from 'tamagui';
+import { getGenresService } from '~/services/getGenres.service';
+import Skeleton from '~/components/shared/Skeleton';
+import { getDumpArray } from '~/utils/array.util';
+import { TruyenTranhLHInstance } from '~/extensions/vi/TruyenTranhLH/instance';
+import { Genre } from '~/models/Genre';
+import { ISearchParams } from '~/common/interfaces/ISearchParams';
 
 interface SearchModalFiltersProps
-  extends Pick<SheetModalProps, 'open' | 'setOpenSheet'> {}
-function SearchModalFilters({ open, setOpenSheet }: SearchModalFiltersProps) {
+  extends Pick<SheetModalProps, 'open' | 'setOpenSheet'> {
+  handleApplyFilter: () => void;
+  setFilters: Dispatch<SetStateAction<ISearchParams>>;
+}
+function SearchModalFilters({
+  open,
+  setOpenSheet,
+  setFilters,
+  handleApplyFilter,
+}: SearchModalFiltersProps) {
   const [dynamicSnapPoints, setDynamicSnapPoints] = useState<number>(65);
+  const [filters, _setFilters] = useState<
+    Pick<ISearchParams, 'status' | 'genre' | 'sort'>
+  >({
+    //TODO: select dynamic source when implement feature "select source"
+    status: TruyenTranhLHInstance.status[0].value,
+    sort: TruyenTranhLHInstance.sort[0].value,
+  });
+
+  const { data: genres, status } = getGenresService();
+
+  const setSelectFilter = useCallback((category: string, value: string) => {
+    _setFilters((filters) => ({ ...filters, [category]: value }));
+  }, []);
+
+  const handleFilter = () => {
+    handleApplyFilter();
+    setFilters({
+      status: filters.status,
+      genre: filters.genre,
+      sort: filters.sort,
+    });
+  };
 
   return (
     <SheetModal
+      disableDrag
       snapPoints={[dynamicSnapPoints]}
       open={open}
       setOpenSheet={setOpenSheet}
     >
-      <View className='w-full flex-row justify-end mb-4'>
-        <TouchableHighlight className='bg-primary/50 w-fit py-3 px-3 rounded-3xl'>
+      <View className='w-full flex-row justify-end mb-4 space-x-4'>
+        <TouchableOpacity
+          onPress={() =>
+            _setFilters({
+              //TODO: select dynamic source when implement feature "select source"
+              status: TruyenTranhLHInstance.status[0].value,
+              sort: TruyenTranhLHInstance.sort[0].value,
+              genre: '',
+            })
+          }
+          className='w-fit py-3 px-3 rounded-3xl'
+        >
+          <Text className='text-white text-base'>Đặt lại</Text>
+        </TouchableOpacity>
+
+        <TouchableHighlight
+          onPress={handleFilter}
+          className='bg-primary/50 w-fit py-3 px-3 rounded-3xl'
+        >
           <Text className='text-white text-base'>Lọc ngay</Text>
         </TouchableHighlight>
       </View>
@@ -32,12 +87,28 @@ function SearchModalFilters({ open, setOpenSheet }: SearchModalFiltersProps) {
         <Text className='text-white mr-4'>Trạng thái</Text>
         <SelectBox
           selectLabel='Trạng thái'
-          placeholder='Đang tiến hành'
-          items={[
-            { name: 'Tất cả', value: 'all' },
-            { name: 'Đang tiến hành', value: 'action' },
-            { name: 'Hoàn thành', value: 'romance' },
-          ]}
+          selectLabelValue='status'
+          placeholder='Tất cả'
+          defaultValue={filters.status}
+          setSelectFilter={setSelectFilter}
+          //TODO: dynamic source select
+          items={TruyenTranhLHInstance.status.map((e) => {
+            return { name: e.label, value: e.value };
+          })}
+        />
+      </View>
+
+      <View className='flex-row items-center justify-between mb-6 w-[80%]'>
+        <Text className='text-white mr-4'>Sắp xếp</Text>
+        <SelectBox
+          selectLabel='Sắp xếp'
+          selectLabelValue='sort'
+          placeholder='Sắp xếp'
+          defaultValue={filters.sort}
+          setSelectFilter={setSelectFilter}
+          items={TruyenTranhLHInstance.sort.map((e) => {
+            return { name: e.label, value: e.value };
+          })}
         />
       </View>
 
@@ -71,15 +142,66 @@ function SearchModalFilters({ open, setOpenSheet }: SearchModalFiltersProps) {
       </View>
 
       <ScrollView className='w-full' showsVerticalScrollIndicator={true}>
-        <CheckboxWithLabel size='$5' label='Hành động' value='action' />
-        <CheckboxWithLabel size='$5' label='Ngôn tình' value='romance' />
-        <CheckboxWithLabel size='$5' label='Siêu nhiên' value='fantasy' />
-        <CheckboxWithLabel size='$5' label='Phiêu lưu' value='ádsada' />
-        <CheckboxWithLabel size='$5' label='Isekai' value='isekai' />
-        <CheckboxWithLabel size='$5' label='Ẩm thực' value='am-thuc' />
+        <RadioGroup
+          onValueChange={(value) => setSelectFilter('genre', value)}
+          value={filters.genre}
+          name='form'
+        >
+          {genres && genres.length > 0 && (
+            <RadioGroupGenre
+              genres={genres}
+              filters={filters}
+              setSelectFilter={setSelectFilter}
+            />
+          )}
+        </RadioGroup>
+
+        {status === 'loading' &&
+          getDumpArray(6).map((e) => {
+            return (
+              <View key={e} className='my-2'>
+                <Skeleton height={30} width={200}>
+                  <View className='bg-white/20 w-full h-full rounded-xl items-center justify-center flex'></View>
+                </Skeleton>
+              </View>
+            );
+          })}
       </ScrollView>
     </SheetModal>
   );
 }
+
+const RadioGroupGenre = memo(function ({
+  filters,
+  setSelectFilter,
+  genres,
+}: {
+  filters: Pick<ISearchParams, 'status' | 'genre' | 'sort'>;
+  setSelectFilter: (category: string, value: string) => void;
+  genres: Genre[];
+}) {
+  console.log('radio group render');
+
+  return (
+    <RadioGroup
+      onValueChange={(value) => setSelectFilter('genre', value)}
+      value={filters.genre}
+      name='form'
+    >
+      {genres &&
+        genres.length > 0 &&
+        genres.map((genre) => {
+          return (
+            <RadioGroupItemWithLabel
+              key={genre.url}
+              size='$5'
+              value={genre?.value || genre?.url}
+              label={genre.title}
+            />
+          );
+        })}
+    </RadioGroup>
+  );
+});
 
 export default memo(SearchModalFilters);
